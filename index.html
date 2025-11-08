@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <meta name="description" content="Tasky - Професійний менеджер задач">
+    <title>Tasky - Менеджер задач</title>
+    
+    <!-- Стилі -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/modal.css">
+    <link rel="stylesheet" href="assets/css/animations.css">
+    <link rel="stylesheet" href="assets/css/language_btn.css">
+    <link rel="stylesheet" href="assets/css/calendar.css">
+    <link rel="stylesheet" href="assets/css/loader.css">
+    <link rel="stylesheet" href="assets/css/mobile-base.css">
+    <link rel="stylesheet" href="assets/css/mobile-small.css">
+    <link rel="stylesheet" href="assets/css/mobile-utils.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>✓</text></svg>">
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div id="appLoader" role="status" aria-live="polite">
+        <div class="loader-logo">✓</div>
+        <div class="loader-text">Tasky</div>
+        <div class="loader-spinner"></div>
+        <span class="sr-only">Завантаження додатку...</span>
+    </div>
+
+    <!-- Skip to main content -->
+    <a href="#mainContent" class="skip-link">Перейти до основного вмісту</a>
+
+    <!-- Overlay для sidebar -->
+    <div id="sidebarOverlay" class="sidebar-overlay" role="presentation"></div>
+
+    <!-- Sidebar Navigation -->
+    <aside class="sidebar" id="sidebar" role="navigation" aria-label="Головна навігація">
+        <div class="sidebar-header">
+            <div class="logo">
+                <span class="logo-icon" aria-hidden="true">✓</span>
+                <span class="logo-text" data-i18n="app.title">Tasky</span>
+            </div>
+        </div>
+
+        <nav class="sidebar-nav">
+            <button class="nav-item active" data-page="tasks" aria-label="Задачі" aria-current="page">
+                <span class="nav-icon" aria-hidden="true">📋</span>
+                <span class="nav-text" data-i18n="nav.tasks">Задачі</span>
+                <span class="nav-badge" id="navTasksCount" aria-label="активних задач">0</span>
+            </button>
+            <button class="nav-item" data-page="calendar" aria-label="Календар">
+                <span class="nav-icon" aria-hidden="true">📅</span>
+                <span class="nav-text" data-i18n="nav.calendar">Календар</span>
+            </button>
+            <button class="nav-item" data-page="categories" aria-label="Категорії">
+                <span class="nav-icon" aria-hidden="true">📂</span>
+                <span class="nav-text" data-i18n="nav.categories">Категорії</span>
+            </button>
+            <button class="nav-item" data-page="statistics" aria-label="Статистика">
+                <span class="nav-icon" aria-hidden="true">📊</span>
+                <span class="nav-text" data-i18n="nav.statistics">Статистика</span>
+            </button>
+            <button class="nav-item" data-page="settings" aria-label="Налаштування">
+                <span class="nav-icon" aria-hidden="true">⚙️</span>
+                <span class="nav-text" data-i18n="nav.settings">Налаштування</span>
+            </button>
+        </nav>
+
+        <div class="sidebar-footer">
+            <button id="themeToggle" class="theme-toggle-btn" aria-label="Перемкнути тему">
+                <span class="theme-icon" aria-hidden="true">🌙</span>
+                <span class="theme-text" data-i18n="nav.theme">Темна тема</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="mainContent" role="main">
+        <!-- Mobile Header -->
+        <div class="mobile-header">
+            <button id="hamburgerBtn" class="hamburger-btn" aria-label="Відкрити меню" aria-expanded="false" aria-controls="sidebar">
+                <span aria-hidden="true">☰</span>
+            </button>
+            <div class="mobile-logo">
+                <span class="mobile-logo-icon" aria-hidden="true">✓</span>
+                <span data-i18n="app.title">Tasky</span>
+            </div>
+            <button id="mobileThemeBtn" class="hamburger-btn" aria-label="Перемкнути тему">
+                <span class="theme-icon" aria-hidden="true">🌙</span>
+            </button>
+        </div>
+
+        <!-- Page: Tasks -->
+        <div class="page active" id="page-tasks" role="tabpanel" aria-labelledby="nav-tasks">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1 data-i18n="page.tasks.title">Мої задачі</h1>
+                    <p class="page-subtitle" data-i18n="page.tasks.subtitle">Керуйте своїми завданнями ефективно</p>
+                </div>
+                <div class="page-actions">
+                    <button id="exportBtn" class="btn-icon" aria-label="Експорт даних">
+                        <span aria-hidden="true">💾</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="page-content">
+                <!-- Add Task Form -->
+                <section class="add-task-card" aria-labelledby="addTaskTitle">
+                    <h2 id="addTaskTitle" class="sr-only">Додати нову задачу</h2>
+                    <form id="taskForm" class="task-form">
+                        <label for="taskInput" class="sr-only">Текст задачі</label>
+                        <input 
+                            type="text" 
+                            id="taskInput" 
+                            class="task-input" 
+                            data-i18n="form.placeholder"
+                            placeholder="Що потрібно зробити?.."
+                            autocomplete="off"
+                            maxlength="200"
+                            aria-required="true"
+                        >
+                        
+                        <div class="task-options">
+                            <label for="categorySelect" class="sr-only">Категорія</label>
+                            <select id="categorySelect" class="form-select" aria-label="Категорія">
+                                <option value="">Категорія</option>
+                                <option value="work">💼 Робота</option>
+                                <option value="personal">👤 Особисте</option>
+                                <option value="shopping">🛒 Покупки</option>
+                                <option value="health">💪 Здоров'я</option>
+                                <option value="study">📚 Навчання</option>
+                                <option value="home">🏠 Дім</option>
+                            </select>
+                            
+                            <label for="prioritySelect" class="sr-only">Пріоритет</label>
+                            <select id="prioritySelect" class="form-select" aria-label="Пріоритет">
+                                <option value="low">🟢 Низький</option>
+                                <option value="medium" selected>🟡 Середній</option>
+                                <option value="high">🔴 Високий</option>
+                            </select>
+                            
+                            <label for="deadlineInput" class="sr-only">Дедлайн</label>
+                            <input 
+                                type="date" 
+                                id="deadlineInput" 
+                                class="form-select"
+                                aria-label="Дедлайн"
+                            >
+                        </div>
+                        
+                        <button type="submit" class="btn-primary">
+                            <span aria-hidden="true">+</span>
+                            <span data-i18n="form.addButton">Додати задачу</span>
+                        </button>
+                    </form>
+                </section>
+
+                <!-- Search & Filters -->
+                <section class="controls-section" aria-label="Пошук та фільтри">
+                    <div class="search-box" role="search">
+                        <span class="search-icon" aria-hidden="true">🔍</span>
+                        <label for="searchInput" class="sr-only">Пошук задач</label>
+                        <input 
+                            type="search" 
+                            id="searchInput" 
+                            class="search-input" 
+                            placeholder="Пошук задач..."
+                            autocomplete="off"
+                            aria-label="Пошук задач"
+                        >
+                        <button id="clearSearch" class="clear-search" style="display: none;" aria-label="Очистити пошук">
+                            <span aria-hidden="true">✕</span>
+                        </button>
+                    </div>
+
+                    <div class="filter-group" role="group" aria-label="Фільтри задач">
+                        <button class="filter-btn active" data-filter="all" aria-pressed="true">
+                            <span>Всі</span> <span class="badge" id="allCount">0</span>
+                        </button>
+                        <button class="filter-btn" data-filter="active" aria-pressed="false">
+                            <span>Активні</span> <span class="badge" id="activeCount">0</span>
+                        </button>
+                        <button class="filter-btn" data-filter="completed" aria-pressed="false">
+                            <span>Виконані</span> <span class="badge" id="completedCount">0</span>
+                        </button>
+                    </div>
+
+                    <label for="sortSelect" class="sr-only">Сортування</label>
+                    <select id="sortSelect" class="form-select" aria-label="Сортування">
+                        <option value="createdAt">За датою створення</option>
+                        <option value="priority">За пріоритетом</option>
+                        <option value="deadline">За дедлайном</option>
+                        <option value="alphabetical">За алфавітом</option>
+                    </select>
+                </section>
+
+                <!-- Category Chips -->
+                <div class="category-chips" role="group" aria-label="Категорії">
+                    <button class="chip active" data-category="all" aria-pressed="true">Всі</button>
+                    <button class="chip" data-category="work" aria-pressed="false">💼 Робота</button>
+                    <button class="chip" data-category="personal" aria-pressed="false">👤 Особисте</button>
+                    <button class="chip" data-category="shopping" aria-pressed="false">🛒 Покупки</button>
+                    <button class="chip" data-category="health" aria-pressed="false">💪 Здоров'я</button>
+                    <button class="chip" data-category="study" aria-pressed="false">📚 Навчання</button>
+                    <button class="chip" data-category="home" aria-pressed="false">🏠 Дім</button>
+                </div>
+
+                <!-- Tasks List -->
+                <section class="tasks-section" aria-live="polite" aria-atomic="false">
+                    <ul id="tasksList" class="tasks-list" role="list" aria-label="Список задач"></ul>
+                    
+                    <div id="emptyState" class="empty-state" role="status">
+                        <div class="empty-icon" aria-hidden="true">📝</div>
+                        <h3>Немає задач</h3>
+                        <p>Створіть свою першу задачу!</p>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="tasks-footer">
+                    <span id="totalTasks" aria-live="polite">0 задач</span>
+                    <button id="clearCompleted" class="btn-danger">
+                        Очистити виконані
+                    </button>
+                </footer>
+            </div>
+        </div>
+
+        <!-- Page: Calendar -->
+        <div class="page" id="page-calendar">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1 data-i18n="page.calendar.title">Календар</h1>
+                    <p class="page-subtitle" data-i18n="page.calendar.subtitle">Плануйте свої задачі</p>
+                </div>
+            </div>
+            
+            <div class="page-content">
+                <div class="calendar-stats">
+                    <div class="calendar-stat-card">
+                        <div class="calendar-stat-value" id="calendarStatsMonth">0</div>
+                        <div class="calendar-stat-label">Цього місяця</div>
+                    </div>
+                    <div class="calendar-stat-card">
+                        <div class="calendar-stat-value" id="calendarStatsCompleted">0</div>
+                        <div class="calendar-stat-label">Виконано</div>
+                    </div>
+                    <div class="calendar-stat-card">
+                        <div class="calendar-stat-value" id="calendarStatsUpcoming">0</div>
+                        <div class="calendar-stat-label">Заплановано</div>
+                    </div>
+                    <div class="calendar-stat-card">
+                        <div class="calendar-stat-value" id="calendarStatsRate">0%</div>
+                        <div class="calendar-stat-label">Завершення</div>
+                    </div>
+                </div>
+        
+                <div class="calendar-header">
+                    <h2 class="calendar-title" id="calendarTitle">Листопад 2024</h2>
+                    
+                    <div class="calendar-controls">
+                        <div class="calendar-nav">
+                            <button id="calendarPrev" aria-label="Попередній місяць">←</button>
+                            <button id="calendarToday" aria-label="Сьогодні">•</button>
+                            <button id="calendarNext" aria-label="Наступний місяць">→</button>
+                        </div>
+                        
+                        <select id="calendarView" class="calendar-view-select" aria-label="Вигляд календаря">
+                            <option value="month">Місяць</option>
+                            <option value="week">Тиждень</option>
+                            <option value="day">День</option>
+                        </select>
+                    </div>
+                </div>
+        
+                <div id="calendarGrid" class="calendar-grid month-view" role="grid"></div>
+            </div>
+        </div>
+        
+        <div id="dateTasksPanel" class="date-tasks-panel">
+            <div class="date-tasks-header">
+                <h3 class="date-tasks-title" id="dateTasksTitle">Вибрана дата</h3>
+                <button id="closeTaskList" class="btn-close-panel" aria-label="Закрити">✕</button>
+            </div>
+            <div class="date-tasks-list" id="dateTasksList"></div>
+        </div>
+
+        <!-- Page: Categories -->
+        <div class="page" id="page-categories">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Категорії</h1>
+                    <p class="page-subtitle">Організуйте задачі по категоріях</p>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="categories-grid" id="categoriesGrid"></div>
+            </div>
+        </div>
+
+        <!-- Page: Statistics -->
+        <div class="page" id="page-statistics">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Статистика</h1>
+                    <p class="page-subtitle">Аналізуйте свою продуктивність</p>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="stats-grid" id="statsGrid"></div>
+            </div>
+        </div>
+
+        <!-- Page: Settings -->
+        <div class="page" id="page-settings">
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Налаштування</h1>
+                    <p class="page-subtitle">Персоналізуйте додаток</p>
+                </div>
+            </div>
+            <div class="page-content">
+                <div class="settings-section">
+                    <h3>Зовнішній вигляд</h3>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Тема</span>
+                            <span class="setting-description">Темна або світла тема</span>
+                        </div>
+                        <button id="themeToggleBtn" class="btn-secondary">Змінити тему</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Мова</span>
+                            <span class="setting-description">Виберіть мову інтерфейсу</span>
+                        </div>
+                        <div class="language-buttons">
+                            <button data-lang="en" class="btn-secondary lang-btn">🇬🇧 EN</button>
+                            <button data-lang="uk" class="btn-secondary lang-btn">🇺🇦 UK</button>
+                            <button data-lang="ru" class="btn-secondary lang-btn">🇷🇺 RU</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="settings-section">
+                    <h3>Дані</h3>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Експорт даних</span>
+                            <span class="setting-description">Завантажити всі задачі</span>
+                        </div>
+                        <button id="settingsExportBtn" class="btn-secondary">Експорт</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Імпорт даних</span>
+                            <span class="setting-description">Завантажити задачі з файлу</span>
+                        </div>
+                        <button id="settingsImportBtn" class="btn-secondary">Імпорт</button>
+                    </div>
+                    <div class="setting-item">
+                        <div class="setting-info">
+                            <span class="setting-label">Очистити всі дані</span>
+                            <span class="setting-description">Видалити всі задачі</span>
+                        </div>
+                        <button id="clearAllBtn" class="btn-danger">Очистити</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- UNIVERSAL MODAL -->
+    <div id="universalModal" class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modalTitle"></h2>
+                <button class="modal-close" aria-label="Закрити">✕</button>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer" id="modalFooter"></div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Hide loader after DOM loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('appLoader').classList.add('hidden');
+            }, 500);
+        });
+    </script>
+    
+    <script src="assets/js/core.js"></script>
+    <script src="assets/js/i18n.js"></script>
+    <script src="assets/js/ui.js"></script>
+    <script src="assets/js/modals-universal.js"></script>
+    <script src="assets/js/export.js"></script>
+    <script src="assets/js/app-controls.js"></script>
+    <script src="assets/js/calendar.js"></script>
+    <script src="assets/js/app.js"></script>
+</body>
+</html>

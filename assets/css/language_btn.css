@@ -1,0 +1,79 @@
+/* ================================================
+   LANGUAGE_BTN.CSS - Кнопки перемикання мови
+   ================================================ */
+
+/* Language Switcher */
+.language-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.lang-btn {
+    min-width: 70px;
+    padding: 8px 12px;
+    background: var(--surface-hover);
+    color: var(--text);
+    border: 2px solid var(--border);
+    border-radius: 8px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+
+.lang-btn:hover {
+    background: var(--surface-elevated);
+    border-color: var(--border-hover);
+    transform: translateY(-2px);
+}
+
+.lang-btn.active {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.lang-btn:active { transform: translateY(0); }
+
+/* ================================================
+   ANIMATIONS
+   ================================================ */
+@keyframes langChange {
+    0%, 100% { opacity: 1; transform: translateY(0); }
+    50% { opacity: 0.5; transform: translateY(-5px); }
+}
+
+.lang-changing { animation: langChange 0.3s ease-in-out; }
+
+/* ================================================
+   NOTIFICATION
+   ================================================ */
+.notification {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--success);
+    color: white;
+    padding: 16px 24px;
+    border-radius: 12px;
+    box-shadow: 0 8px 20px var(--shadow);
+    z-index: 10000;
+    font-weight: 500;
+    animation: slideIn 0.3s ease-out, fadeOut 0.3s ease-out 2.7s forwards;
+}
+
+@keyframes slideIn {
+    from { opacity: 0; transform: translateX(-50%) translateY(20px); }
+    to { opacity: 1; transform: translateX(-50%) translateY(0); }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}

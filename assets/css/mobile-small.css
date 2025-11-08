@@ -1,0 +1,357 @@
+/* ================================================
+   MOBILE-SMALL.CSS - Малі екрани (480px та менше)
+   ================================================ */
+
+@media (max-width: 480px) {
+    /* Header & Layout */
+    .mobile-header {
+        padding: 12px 16px;
+        height: 56px;
+    }
+    
+    .main-content { padding-top: 56px; }
+    
+    .hamburger-btn {
+        width: 42px;
+        height: 42px;
+        font-size: 1.3rem;
+    }
+    
+    .mobile-logo-icon {
+        width: 32px;
+        height: 32px;
+    }
+    
+    /* Sidebar */
+    .logo {
+        font-size: 1.2rem;
+        gap: 10px;
+    }
+    
+    .logo-icon {
+        width: 32px;
+        height: 32px;
+        font-size: 1rem;
+    }
+    
+    /* Typography */
+    .page-title h1 { font-size: 1.3rem; }
+    .page-subtitle { font-size: 0.8rem; }
+    
+    /* Buttons */
+    .btn-primary {
+        padding: 15px 22px;
+        font-size: 0.98rem;
+        min-height: 50px;
+        border-radius: 11px;
+    }
+    
+    .btn-secondary {
+        padding: 11px 18px;
+        font-size: 0.92rem;
+        min-height: 46px;
+        border-radius: 9px;
+    }
+    
+    .btn-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 1.2rem;
+    }
+    
+    .btn-danger {
+        padding: 13px 18px;
+        font-size: 0.92rem;
+        min-height: 50px;
+        border-radius: 11px;
+    }
+    
+    /* Content */
+    .page-content { padding: 16px 14px; }
+    .add-task-card { padding: 16px; margin-bottom: 16px; }
+    .task-form { gap: 12px; }
+    
+    /* Inputs */
+    .task-input,
+    .search-input {
+        font-size: 0.95rem;
+        min-height: 50px;
+        border-radius: 11px;
+    }
+    
+    .task-input { padding: 15px 16px; }
+    .search-input { padding: 13px 42px; }
+    
+    .search-icon { left: 14px; }
+    .clear-search { right: 9px; width: 30px; height: 30px; }
+    
+    .form-select {
+        padding: 13px 14px;
+        font-size: 0.92rem;
+        min-height: 50px;
+        border-radius: 11px;
+    }
+    
+    /* Controls */
+    .controls-section {
+        gap: 10px;
+        margin-bottom: 16px;
+    }
+    
+    .filter-group {
+        padding: 3px;
+        border-radius: 9px;
+    }
+    
+    .filter-btn {
+        padding: 10px;
+        font-size: 0.85rem;
+        min-height: 44px;
+        border-radius: 7px;
+    }
+    
+    .badge {
+        font-size: 0.7rem;
+        padding: 2px 6px;
+        min-width: 18px;
+    }
+    
+    /* Chips */
+    .category-chips {
+        gap: 7px;
+        margin-bottom: 16px;
+    }
+    
+    .chip {
+        padding: 9px 14px;
+        font-size: 0.88rem;
+        min-height: 42px;
+        border-radius: 18px;
+    }
+    
+    /* Tasks */
+    .tasks-section { min-height: 220px; }
+    .tasks-list { gap: 9px; }
+    
+    .task-item {
+        padding: 16px 14px;
+        gap: 12px;
+        min-height: 68px;
+    }
+    
+    .task-checkbox {
+        width: 26px;
+        height: 26px;
+        min-width: 26px;
+    }
+    
+    .task-text {
+        font-size: 0.95rem;
+        line-height: 1.4;
+    }
+    
+    .task-meta { gap: 6px; }
+    
+    .task-priority,
+    .task-deadline,
+    .task-category {
+        font-size: 0.75rem;
+        padding: 3px 8px;
+        border-radius: 5px;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        width: 42px;
+        height: 42px;
+        font-size: 1.05rem;
+        border-radius: 9px;
+    }
+    
+    /* Empty State */
+    .empty-state { padding: 40px 14px; }
+    .empty-icon { font-size: 2.8rem; }
+    .empty-state h3 { font-size: 1.15rem; }
+    .empty-state p { font-size: 0.85rem; }
+    
+    /* Grids */
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .stat-card { padding: 18px; }
+    .stat-value { font-size: 2rem; }
+    .stat-label { font-size: 0.82rem; }
+    
+    .category-card { padding: 18px; }
+    .category-icon { font-size: 2.2rem; }
+    .category-name { font-size: 1rem; }
+    .category-count { font-size: 0.85rem; }
+    
+    /* Settings */
+    .settings-section {
+        padding: 16px;
+        margin-bottom: 16px;
+        border-radius: 11px;
+    }
+    
+    .settings-section h3 {
+        font-size: 0.95rem;
+        margin-bottom: 12px;
+    }
+    
+    .setting-item { padding: 12px 0; gap: 9px; }
+    .setting-label { font-size: 0.9rem; }
+    .setting-description { font-size: 0.78rem; }
+    
+    .lang-btn {
+        padding: 11px;
+        font-size: 0.9rem;
+        min-height: 46px;
+        border-radius: 9px;
+    }
+    
+    /* Modals */
+    .modal-header h2 { font-size: 1.2rem; }
+    .modal-close { width: 40px; height: 40px; }
+    
+    /* Calendar */
+    .calendar-header {
+        padding: 12px;
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    .calendar-title { font-size: 1.1rem; }
+    
+    .calendar-controls {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .calendar-nav button {
+        width: 36px;
+        height: 36px;
+    }
+    
+    .calendar-view-select {
+        padding: 6px 10px;
+        font-size: 0.85rem;
+    }
+    
+    .calendar-grid {
+        padding: 8px;
+        gap: 4px;
+    }
+    
+    .calendar-weekday {
+        padding: 8px 4px;
+        font-size: 0.75rem;
+    }
+    
+    .calendar-day {
+        min-height: 60px;
+        padding: 4px;
+    }
+    
+    .day-number { font-size: 0.85rem; }
+    
+    .day-tasks-count {
+        width: 16px;
+        height: 16px;
+        font-size: 0.7rem;
+    }
+    
+    .day-task { display: none; }
+    .calendar-day.has-tasks { border-left-width: 2px; }
+    .date-tasks-panel { width: 100%; right: -100%; }
+    .calendar-stats { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* Small Mobile (360px) */
+@media (max-width: 360px) {
+    .page-title h1 { font-size: 1.2rem; }
+    .page-subtitle { font-size: 0.75rem; }
+    
+    .task-input,
+    .search-input { font-size: 0.9rem; min-height: 48px; }
+    
+    .form-select {
+        font-size: 0.88rem;
+        padding: 12px 13px;
+        min-height: 48px;
+    }
+    
+    .btn-primary {
+        font-size: 0.95rem;
+        padding: 13px 20px;
+        min-height: 48px;
+    }
+    
+    .filter-btn {
+        font-size: 0.8rem;
+        padding: 9px 8px;
+        min-height: 42px;
+    }
+    
+    .badge {
+        font-size: 0.68rem;
+        padding: 1px 5px;
+    }
+    
+    .chip {
+        font-size: 0.85rem;
+        padding: 8px 13px;
+        min-height: 40px;
+    }
+    
+    .task-item {
+        padding: 14px 12px;
+        min-height: 64px;
+    }
+    
+    .task-text { font-size: 0.92rem; }
+    
+    .task-priority,
+    .task-deadline,
+    .task-category {
+        font-size: 0.72rem;
+        padding: 2px 7px;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        width: 40px;
+        height: 40px;
+        font-size: 1rem;
+    }
+    
+    .empty-icon { font-size: 2.5rem; }
+    .empty-state h3 { font-size: 1.1rem; }
+    .empty-state p { font-size: 0.82rem; }
+}
+
+/* Fold Devices (280px) */
+@media (max-width: 280px) {
+    .mobile-logo { font-size: 1rem; }
+    .page-title h1 { font-size: 1.1rem; }
+    
+    .task-input,
+    .form-select {
+        font-size: 0.85rem;
+        padding: 11px 12px;
+    }
+    
+    .btn-primary {
+        font-size: 0.88rem;
+        padding: 12px 16px;
+    }
+    
+    .filter-btn {
+        font-size: 0.75rem;
+        padding: 8px 6px;
+    }
+    
+    .task-text { font-size: 0.88rem; }
+}

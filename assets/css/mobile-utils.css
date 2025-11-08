@@ -1,0 +1,246 @@
+/* ================================================
+   MOBILE-UTILS.CSS - Утиліти (медіа-запити, PWA, оптимізація)
+   ================================================ */
+
+/* Touch Devices */
+@media (hover: none) and (pointer: coarse) {
+    .btn-primary,
+    .btn-secondary,
+    .btn-danger,
+    .filter-btn,
+    .chip,
+    .task-checkbox,
+    .btn-edit,
+    .btn-delete,
+    .btn-icon,
+    .nav-item,
+    .theme-toggle-btn,
+    .hamburger-btn {
+        min-height: 44px;
+        min-width: 44px;
+    }
+    
+    .task-item {
+        padding: 18px 16px;
+        min-height: 76px;
+    }
+    
+    .task-actions {
+        opacity: 1;
+        gap: 10px;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        min-width: 48px;
+        min-height: 48px;
+    }
+    
+    .task-item:hover {
+        transform: none;
+        border-color: var(--border);
+    }
+    
+    .btn-primary:active,
+    .btn-secondary:active,
+    .btn-danger:active {
+        transform: scale(0.96);
+    }
+    
+    .task-checkbox:active {
+        transform: scale(1.1);
+    }
+}
+
+/* Landscape */
+@media (max-height: 600px) and (orientation: landscape) {
+    .page-header { padding: 14px 18px; }
+    .page-title h1 { font-size: 1.3rem; }
+    .logo { font-size: 1.1rem; }
+    .logo-icon { width: 30px; height: 30px; }
+    .tasks-section { min-height: 180px; }
+    .empty-state { padding: 30px 16px; }
+    .empty-icon { font-size: 2.5rem; }
+}
+
+/* Print */
+@media print {
+    body {
+        background: white;
+        padding: 0;
+    }
+    
+    .sidebar,
+    .mobile-header,
+    .sidebar-overlay,
+    .page-actions,
+    .add-task-card,
+    .controls-section,
+    .category-chips,
+    .tasks-footer,
+    .btn-edit,
+    .btn-delete {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0 !important;
+        padding-top: 0 !important;
+    }
+    
+    .page-header {
+        background: #6366f1;
+        color: white;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .task-item {
+        break-inside: avoid;
+        page-break-inside: avoid;
+        border: 1px solid #ddd;
+    }
+    
+    .task-item.completed .task-checkbox {
+        background: #10b981;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .sidebar,
+    .task-item,
+    .btn-primary,
+    .btn-secondary,
+    .modal,
+    .hamburger-btn {
+        transition: none !important;
+        animation: none !important;
+    }
+}
+
+@media (prefers-contrast: high) {
+    .task-item,
+    .btn-primary,
+    .btn-secondary,
+    .task-checkbox,
+    .nav-item,
+    .filter-btn {
+        border-width: 2px !important;
+    }
+}
+
+/* Dark Mode (Mobile) */
+@media (max-width: 768px) {
+    body:not(.light-theme) {
+        --text: #ffffff;
+        --border: #2a2a2a;
+        --surface: #0d0d0d;
+    }
+    
+    body:not(.light-theme) .task-item,
+    body:not(.light-theme) .mobile-header {
+        border-color: #2a2a2a;
+    }
+}
+
+/* Safe Area (iPhone X+) */
+@supports (padding: max(0px)) {
+    .mobile-header {
+        padding-left: max(16px, env(safe-area-inset-left));
+        padding-right: max(16px, env(safe-area-inset-right));
+        padding-top: max(16px, env(safe-area-inset-top));
+    }
+    
+    .main-content {
+        padding-bottom: max(20px, env(safe-area-inset-bottom));
+    }
+    
+    .sidebar,
+    .modal-content {
+        padding-bottom: max(0px, env(safe-area-inset-bottom));
+    }
+}
+
+/* Context Menu */
+@media (max-width: 768px) {
+    .context-menu {
+        position: fixed !important;
+        min-width: 200px;
+        max-width: 90vw;
+    }
+    
+    .context-menu-item {
+        padding: 12px 16px !important;
+        font-size: 1rem !important;
+    }
+}
+
+/* Performance */
+@media (max-width: 768px) {
+    .task-item::before { display: none; }
+    
+    .task-item,
+    .add-task-card,
+    .modal-content {
+        box-shadow: 0 2px 8px var(--shadow);
+    }
+    
+    .tasks-list,
+    .category-chips,
+    .sidebar-nav {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+}
+
+/* PWA */
+@media (display-mode: fullscreen),
+       (display-mode: standalone) {
+    .mobile-header {
+        padding-top: max(16px, env(safe-area-inset-top));
+    }
+}
+
+/* iOS Safari */
+@supports (-webkit-touch-callout: none) {
+    .task-input,
+    .search-input,
+    .form-select {
+        font-size: 16px !important;
+    }
+    
+    .mobile-header {
+        -webkit-backdrop-filter: blur(10px);
+        backdrop-filter: blur(10px);
+    }
+    
+    .sidebar {
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+    }
+}
+
+/* Animations (Mobile) */
+@media (max-width: 768px) {
+    @keyframes mobileSlideIn {
+        from {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+    
+    .task-item {
+        animation: mobileSlideIn 0.3s ease-out;
+    }
+    
+    .modal.show .modal-content {
+        animation: slideUp 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+}

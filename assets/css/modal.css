@@ -1,0 +1,460 @@
+/* ================================================
+   MODAL.CSS - Модальні вікна + Context Menu
+   ================================================ */
+
+/* Base Modal */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.modal.show {
+    display: flex;
+    animation: fadeIn 0.3s ease-out;
+}
+
+.modal-content {
+    background: var(--surface);
+    border-radius: 20px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px var(--shadow-lg);
+    animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(50px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* ================================================
+   MODAL HEADER
+   ================================================ */
+.modal-header {
+    padding: 25px 30px;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.modal-header h2 {
+    font-size: 1.5rem;
+    margin: 0;
+}
+
+.modal-close {
+    width: 40px;
+    height: 40px;
+    background: var(--surface-hover);
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    color: var(--text);
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.modal-close:hover {
+    background: var(--danger);
+    color: white;
+    transform: rotate(90deg);
+}
+
+/* ================================================
+   MODAL BODY & FOOTER
+   ================================================ */
+.modal-body { padding: 30px; }
+
+.modal-footer {
+    padding: 20px 30px;
+    border-top: 1px solid var(--border);
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* ================================================
+   TASK DETAILS
+   ================================================ */
+.modal-task-text {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+
+.modal-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.info-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.info-label {
+    color: var(--text-secondary);
+    font-weight: 500;
+    min-width: 100px;
+}
+
+/* ================================================
+   NOTES
+   ================================================ */
+.modal-notes { margin-bottom: 25px; }
+
+.modal-notes label {
+    display: block;
+    font-weight: 500;
+    margin-bottom: 10px;
+}
+
+.task-notes-input {
+    width: 100%;
+    padding: 14px;
+    background: var(--bg-darker);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 0.95rem;
+    font-family: inherit;
+    resize: vertical;
+    transition: all 0.3s ease;
+}
+
+.task-notes-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* ================================================
+   SUBTASKS
+   ================================================ */
+.modal-subtasks h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.subtasks-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 15px;
+    max-height: 200px;
+    overflow-y: auto;
+}
+
+.subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px;
+    background: var(--bg-darker);
+    border-radius: 10px;
+    transition: all 0.3s ease;
+}
+
+.subtask-item:hover { background: var(--surface-hover); }
+
+.subtask-checkbox {
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border: 2px solid var(--border);
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.subtask-checkbox:hover { border-color: var(--success); }
+
+.subtask-item.completed .subtask-checkbox {
+    background: var(--success);
+    border-color: var(--success);
+}
+
+.subtask-checkbox-icon {
+    color: white;
+    font-size: 0.8rem;
+    display: none;
+}
+
+.subtask-item.completed .subtask-checkbox-icon { display: block; }
+
+.subtask-text {
+    flex: 1;
+    font-size: 0.95rem;
+}
+
+.subtask-item.completed .subtask-text {
+    text-decoration: line-through;
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+.btn-delete-subtask {
+    width: 28px;
+    height: 28px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    color: var(--text-secondary);
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.btn-delete-subtask:hover {
+    background: var(--danger);
+    color: white;
+}
+
+/* Add Subtask */
+.add-subtask {
+    display: flex;
+    gap: 10px;
+}
+
+.subtask-input {
+    flex: 1;
+    padding: 12px 16px;
+    background: var(--bg-darker);
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    color: var(--text);
+    font-size: 0.9rem;
+    transition: all 0.3s ease;
+}
+
+.subtask-input:focus {
+    outline: none;
+    border-color: var(--primary);
+}
+
+.btn-add-subtask {
+    width: 44px;
+    height: 44px;
+    background: var(--primary);
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    color: white;
+    font-size: 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.btn-add-subtask:hover {
+    background: var(--primary-hover);
+    transform: scale(1.05);
+}
+
+/* Save Button */
+.btn-save {
+    padding: 12px 32px;
+    background: var(--primary);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-save:hover {
+    background: var(--primary-hover);
+    transform: translateY(-2px);
+}
+
+/* ================================================
+   STATISTICS
+   ================================================ */
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-card {
+    background: var(--bg-darker);
+    padding: 20px;
+    border-radius: 12px;
+    text-align: center;
+    border: 1px solid var(--border);
+    transition: all 0.3s ease;
+}
+
+.stat-card:hover {
+    border-color: var(--primary);
+    transform: translateY(-2px);
+}
+
+.stat-value {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 8px;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+/* Progress Bar */
+.progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: var(--bg-darker);
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 25px;
+}
+
+.progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, var(--primary), var(--primary-light));
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+/* ================================================
+   EXPORT/IMPORT
+   ================================================ */
+.export-section,
+.import-section,
+.backup-section {
+    margin-bottom: 25px;
+}
+
+.export-section h3,
+.import-section h3,
+.backup-section h3 {
+    font-size: 1.1rem;
+    margin-bottom: 15px;
+}
+
+.export-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.btn-export,
+.btn-import,
+.btn-backup,
+.btn-restore {
+    width: 100%;
+    padding: 14px 20px;
+    background: var(--bg-darker);
+    border: 2px solid var(--border);
+    border-radius: 12px;
+    color: var(--text);
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s ease;
+}
+
+.btn-export:hover,
+.btn-import:hover {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: white;
+    transform: translateX(4px);
+}
+
+.btn-backup:hover {
+    background: var(--success);
+    border-color: var(--success);
+    color: white;
+}
+
+.btn-restore:hover {
+    background: var(--warning);
+    border-color: var(--warning);
+    color: white;
+}
+
+.import-note {
+    color: var(--text-secondary);
+    font-size: 0.85rem;
+    margin-top: 10px;
+    text-align: center;
+}
+
+/* ================================================
+   CONTEXT MENU (Новий блок)
+   ================================================ */
+.context-menu {
+    position: fixed;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 4px;
+    box-shadow: 0 4px 20px var(--shadow-lg);
+    z-index: 10000;
+    min-width: 180px;
+    animation: fadeIn 0.15s ease-out;
+}
+
+.context-menu-item {
+    width: 100%;
+    padding: 8px 12px;
+    background: transparent;
+    border: none;
+    border-radius: 6px;
+    color: var(--text);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    transition: background 0.2s ease;
+    text-align: left;
+}
+
+.context-menu-item:hover {
+    background: var(--surface-hover);
+}
+
+.context-menu-item.danger {
+    color: var(--danger);
+}
+
+.context-menu-item.danger:hover {
+    background: rgba(239, 68, 68, 0.1);
+}
+
+.context-menu-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 4px 0;
+}

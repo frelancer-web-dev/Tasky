@@ -1,0 +1,196 @@
+/* ================================================
+   ANIMATIONS.CSS - Анімації для задач
+   ================================================ */
+
+/* ================================================
+   KEYFRAMES
+   ================================================ */
+@keyframes slideIn {
+    from { opacity: 0; transform: translateY(-20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideOut {
+    from { opacity: 1; transform: translateX(0); }
+    to { opacity: 0; transform: translateX(100px); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes fadeOut {
+    from { opacity: 1; }
+    to { opacity: 0; }
+}
+
+@keyframes bounce {
+    0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+    40% { transform: translateY(-10px); }
+    60% { transform: translateY(-5px); }
+}
+
+@keyframes spinner {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+@keyframes confetti-fall {
+    from { transform: translateY(0) rotate(0deg); opacity: 1; }
+    to { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes ripple-animation {
+    to { transform: scale(4); opacity: 0; }
+}
+
+/* ================================================
+   APPLIED ANIMATIONS
+   ================================================ */
+.task-item { animation: slideIn 0.4s ease-out; }
+.task-item.removing { animation: slideOut 0.4s ease-out forwards; }
+.task-input.error {
+    animation: shake 0.5s ease-in-out;
+    border-color: var(--danger) !important;
+}
+
+.btn-add:active,
+.task-checkbox:active { animation: pulse 0.2s ease-in-out; }
+.btn-delete:active { animation: spin 0.3s ease-in-out; }
+.empty-state.show { animation: fadeIn 0.5s ease-in-out; }
+
+/* ================================================
+   HOVER EFFECTS
+   ================================================ */
+.task-item {
+    position: relative;
+    overflow: hidden;
+}
+
+.task-item::before {
+    content: '';
+    position: absolute;
+    inset: 0 auto 0 -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(99, 102, 241, 0.1), transparent);
+    transition: left 0.5s ease;
+}
+
+.task-item:hover::before { left: 100%; }
+
+/* ================================================
+   TRANSITIONS
+   ================================================ */
+button,
+input,
+.task-checkbox,
+.filter-btn,
+.count,
+.task-item,
+.empty-state,
+.btn-delete {
+    transition: all 0.3s ease;
+}
+
+.filter-btn.active .count { animation: bounce 0.5s ease-in-out; }
+
+/* ================================================
+   PAGE ANIMATIONS
+   ================================================ */
+.footer { animation: fadeIn 0.5s ease-in-out 0.3s both; }
+.header { animation: fadeIn 0.6s ease-in-out; }
+.logo { animation: fadeIn 0.8s ease-in-out 0.2s both; }
+.subtitle { animation: fadeIn 1s ease-in-out 0.4s both; }
+.add-task-section { animation: fadeIn 0.7s ease-in-out 0.3s both; }
+
+/* ================================================
+   SMOOTH SCROLL
+   ================================================ */
+.tasks-container { scroll-behavior: smooth; }
+
+/* ================================================
+   FOCUS ANIMATION
+   ================================================ */
+.task-input:focus { animation: pulse 0.3s ease-in-out; }
+
+/* ================================================
+   RIPPLE EFFECT
+   ================================================ */
+.btn-add,
+.btn-clear,
+.filter-btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-add::after,
+.btn-clear::after,
+.filter-btn::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+}
+
+.btn-add:active::after,
+.btn-clear:active::after,
+.filter-btn:active::after {
+    width: 300px;
+    height: 300px;
+}
+
+/* ================================================
+   CHECKBOX ANIMATION
+   ================================================ */
+.task-checkbox-icon { animation: fadeIn 0.2s ease-in-out; }
+.task-item.completed { animation: pulse 0.3s ease-in-out; }
+
+/* ================================================
+   LOADING SPINNER
+   ================================================ */
+.loading {
+    width: 20px;
+    height: 20px;
+    border: 3px solid var(--border);
+    border-top-color: var(--primary);
+    border-radius: 50%;
+    animation: spinner 0.8s linear infinite;
+}
+
+/* ================================================
+   CASCADING DELAYS
+   ================================================ */
+.task-item:nth-child(1) { animation-delay: 0.05s; }
+.task-item:nth-child(2) { animation-delay: 0.1s; }
+.task-item:nth-child(3) { animation-delay: 0.15s; }
+.task-item:nth-child(4) { animation-delay: 0.2s; }
+.task-item:nth-child(5) { animation-delay: 0.25s; }
+.task-item:nth-child(6) { animation-delay: 0.3s; }
+.task-item:nth-child(7) { animation-delay: 0.35s; }
+.task-item:nth-child(8) { animation-delay: 0.4s; }
+.task-item:nth-child(9) { animation-delay: 0.45s; }
+.task-item:nth-child(10) { animation-delay: 0.5s; }

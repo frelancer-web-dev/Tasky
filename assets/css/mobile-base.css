@@ -1,0 +1,423 @@
+/* ================================================
+   MOBILE-BASE.CSS - Базові мобільні стилі (768px та менше)
+   ================================================ */
+
+.mobile-header { display: none !important; }
+.sidebar-overlay { display: none; }
+
+/* ========================================
+   Tablets and below (768px)
+   ======================================== */
+@media (max-width: 768px) {
+    /* Sidebar */
+    .sidebar {
+        width: 280px;
+        transform: translateX(-100%);
+        z-index: 2000;
+        position: fixed;
+        transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+        box-shadow: 4px 0 20px var(--shadow-lg);
+    }
+    
+    .sidebar-toggle { display: flex; }
+    
+    .sidebar-overlay {
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.5);
+        z-index: 1999;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+    
+    .sidebar-overlay.active {
+        display: block;
+        opacity: 1;
+    }
+    
+    /* Main Layout */
+    .main-content {
+        margin-left: 0 !important;
+        padding-top: 60px;
+        min-height: 100vh;
+    }
+    
+    /* Mobile Header */
+    .mobile-header {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 12px 16px;
+        background: var(--surface);
+        border-bottom: 1px solid var(--border);
+        position: fixed;
+        inset: 0 0 auto;
+        z-index: 1000;
+        height: 60px;
+    }
+    
+    .hamburger-btn,
+    .btn-icon {
+        width: 44px;
+        height: 44px;
+        background: var(--surface-hover);
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+    }
+    
+    .hamburger-btn:active {
+        transform: scale(0.95);
+        background: var(--primary);
+        color: white;
+    }
+    
+    .mobile-logo {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 1.2rem;
+        font-weight: 700;
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .mobile-logo-icon {
+        width: 36px;
+        height: 36px;
+        background: linear-gradient(135deg, var(--primary) 0%, var(--primary-hover) 100%);
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    /* Page Header */
+    .page-header {
+        padding: 16px;
+        flex-direction: column;
+        gap: 12px;
+        border-bottom: 1px solid var(--border);
+    }
+    
+    .page-title h1 { font-size: 1.4rem; }
+    .page-subtitle { font-size: 0.85rem; }
+    
+    /* Buttons */
+    .btn-primary {
+        padding: 16px 24px;
+        font-size: 1rem;
+        min-height: 52px;
+        border-radius: 12px;
+    }
+    
+    .btn-secondary {
+        padding: 12px 20px;
+        font-size: 0.95rem;
+        min-height: 48px;
+    }
+    
+    .btn-icon {
+        width: 48px;
+        height: 48px;
+    }
+    
+    /* Content */
+    .page-content { padding: 20px 18px; }
+    
+    /* ================================================
+       TASKS PAGE FIX - Тільки оверрайди
+       ================================================ */
+    
+    /* Form елементи більші */
+    #page-tasks .task-input {
+        padding: 16px 18px;
+        font-size: 1.05rem;
+        min-height: 56px;
+    }
+    
+    #page-tasks .form-select {
+        padding: 16px 18px;
+        font-size: 1rem;
+        min-height: 56px;
+    }
+    
+    #page-tasks .btn-primary {
+        padding: 18px 24px;
+        font-size: 1.1rem;
+        min-height: 58px;
+    }
+    
+    #page-tasks .btn-primary span:first-child {
+        font-size: 1.3rem;
+    }
+    
+    /* Пошук і контроли */
+    #page-tasks .search-input {
+        padding: 16px 18px 16px 52px;
+        font-size: 1.05rem;
+        min-height: 56px;
+    }
+    
+    #page-tasks .filter-btn {
+        padding: 14px 12px;
+        font-size: 1rem;
+        min-height: 52px;
+    }
+    
+    #page-tasks .chip {
+        padding: 12px 18px;
+        font-size: 1rem;
+        min-height: 50px;
+    }
+    
+    /* Задачі більші */
+    #page-tasks .task-item {
+        padding: 20px 18px;
+        min-height: 80px;
+    }
+    
+    #page-tasks .task-checkbox {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+    }
+    
+    #page-tasks .task-text {
+        font-size: 1.05rem;
+    }
+    
+    #page-tasks .task-priority,
+    #page-tasks .task-deadline,
+    #page-tasks .task-category {
+        font-size: 0.9rem;
+        padding: 6px 12px;
+    }
+    
+    #page-tasks .btn-edit,
+    #page-tasks .btn-delete {
+        width: 48px;
+        height: 48px;
+        font-size: 1.2rem;
+    }
+    
+    /* ================================================
+       Решта стилів без змін
+       ================================================ */
+    
+    /* Forms */
+    .add-task-card {
+        padding: 18px;
+        margin-bottom: 20px;
+    }
+    
+    .task-input,
+    .search-input {
+        padding: 14px 16px;
+        font-size: 1rem;
+        min-height: 52px;
+        border-radius: 12px;
+    }
+    
+    .search-input { padding: 14px 44px; }
+    .search-icon { left: 16px; font-size: 1.1rem; }
+    .clear-search { right: 10px; width: 32px; height: 32px; }
+    
+    .form-select {
+        padding: 14px 16px;
+        font-size: 0.95rem;
+        min-height: 52px;
+    }
+    
+    .task-options {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    /* Controls */
+    .controls-section {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+    
+    .filter-group { width: 100%; }
+    
+    .filter-btn {
+        flex: 1;
+        padding: 12px;
+        font-size: 0.9rem;
+        min-height: 48px;
+    }
+    
+    .badge { font-size: 0.75rem; }
+    
+    /* Category Chips */
+    .category-chips {
+        gap: 8px;
+        margin-bottom: 18px;
+    }
+    
+    .chip {
+        padding: 10px 16px;
+        font-size: 0.9rem;
+        min-height: 44px;
+        border-radius: 20px;
+    }
+    
+    /* Tasks */
+    .task-item {
+        padding: 18px 16px;
+        gap: 14px;
+        min-height: 72px;
+    }
+    
+    .task-item:hover { transform: translateX(2px); }
+    
+    .task-checkbox {
+        width: 28px;
+        height: 28px;
+        min-width: 28px;
+    }
+    
+    .task-text {
+        font-size: 1rem;
+        line-height: 1.5;
+    }
+    
+    .task-meta { gap: 7px; }
+    
+    .task-priority,
+    .task-deadline,
+    .task-category {
+        font-size: 0.8rem;
+        padding: 4px 9px;
+    }
+    
+    .task-actions {
+        opacity: 1;
+        gap: 8px;
+    }
+    
+    .btn-edit,
+    .btn-delete {
+        width: 44px;
+        height: 44px;
+        font-size: 1.1rem;
+    }
+    
+    /* Empty State */
+    .empty-state { padding: 50px 16px; }
+    .empty-icon { font-size: 3rem; }
+    .empty-state h3 { font-size: 1.2rem; }
+    
+    /* Footer */
+    .tasks-footer {
+        flex-direction: column;
+        gap: 12px;
+    }
+    
+    #totalTasks { text-align: center; }
+    
+    .btn-danger {
+        width: 100%;
+        min-height: 52px;
+    }
+    
+    /* Grids */
+    .stats-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 14px;
+    }
+    
+    .categories-grid {
+        grid-template-columns: 1fr;
+        gap: 14px;
+    }
+    
+    .stat-value { font-size: 2.2rem; }
+    .category-icon { font-size: 2.5rem; }
+    
+    /* Settings */
+    .settings-section {
+        padding: 18px;
+        margin-bottom: 18px;
+    }
+    
+    .setting-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    
+    .language-buttons,
+    .setting-item button {
+        width: 100%;
+    }
+    
+    .lang-btn {
+        flex: 1;
+        padding: 12px;
+        min-height: 48px;
+    }
+    
+    /* Sidebar Nav */
+    .nav-item {
+        padding: 14px 16px;
+        font-size: 1rem;
+        min-height: 54px;
+    }
+    
+    .nav-icon { font-size: 1.3rem; }
+    
+    /* Modals */
+    .modal { padding: 0; }
+    
+    .modal-content {
+        max-width: 100%;
+        border-radius: 20px 20px 0 0;
+        margin-top: auto;
+    }
+    
+    .modal-header {
+        padding: 24px 20px;
+    }
+    
+    .modal-header h2 { font-size: 1.3rem; }
+    
+    .modal-close {
+        width: 44px;
+        height: 44px;
+        font-size: 1.4rem;
+    }
+    
+    .modal-body { padding: 20px; }
+    
+    .modal-footer {
+        padding: 20px;
+        gap: 10px;
+    }
+    
+    .modal-footer button {
+        flex: 1;
+        min-height: 52px;
+    }
+}
+
+/* Tablet Portrait (600-768px) */
+@media (min-width: 600px) and (max-width: 768px) {
+    .stats-grid { grid-template-columns: repeat(4, 1fr); }
+    .categories-grid { grid-template-columns: repeat(2, 1fr); }
+    .task-options { grid-template-columns: repeat(2, 1fr); }
+    .modal-content {
+        max-width: 90%;
+        border-radius: 20px;
+    }
+}
